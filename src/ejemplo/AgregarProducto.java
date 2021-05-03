@@ -81,6 +81,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jButton1.setText("Guardar");
 
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
