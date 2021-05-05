@@ -39,7 +39,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ListarProd = new javax.swing.JTable();
         BtnCerrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnModificar = new javax.swing.JButton();
 
         setTitle("Lista de productos");
 
@@ -82,6 +82,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(ListarProd);
 
+        BtnCerrar.setBackground(new java.awt.Color(255, 102, 102));
         BtnCerrar.setText("Cerrar");
         BtnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,10 +90,10 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnModificar.setText("Modificar");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnModificarActionPerformed(evt);
             }
         });
 
@@ -104,7 +105,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                    .addComponent(BtnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -117,7 +118,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(BtnModificar)
                         .addGap(18, 18, 18)
                         .addComponent(BtnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -131,7 +132,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         men.show();
     }//GEN-LAST:event_BtnCerrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         // TODO add your handling code here:
         ModificarProducto abrirVentana= new ModificarProducto();
         Principal.escritorio.add(abrirVentana);
@@ -139,13 +140,13 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         abrirVentana.show();
       
                 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCerrar;
+    private javax.swing.JButton BtnModificar;
     private javax.swing.JTable ListarProd;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
