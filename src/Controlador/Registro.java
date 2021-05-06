@@ -46,7 +46,7 @@ public class Registro {
     
     public DefaultTableModel mostrar() throws SQLException {
 
-        String query2 = "select * from Bodega.Estado";
+        String query2 = "select * from Bodega";
         Object[] datos = new Object[2];
         Object[] columnas = {"idEstado", "tipo_estado"};
 
@@ -72,7 +72,7 @@ public class Registro {
     
     public DefaultTableModel buscar(int cod) throws SQLException {
 
-        String query2 = "select * from Bodega.Estado where idEstado=" + cod;
+        String query2 = "select * from Bodega where idEstado=" + cod;
         Object[] datos = new Object[2];
         Object[] columnas = {"idEstado", "tipo_estado"};
 
@@ -99,7 +99,7 @@ public class Registro {
     public int buscarCodigo(int cod) throws SQLException {
 
         int respuesta = 0;
-        String query2 = "select * from Bodega.Estado where idEstado=" + cod;
+        String query2 = "select * from Bodega where idEstado=" + cod;
 
         try {
             Statement s = Conexion.Connect().createStatement();
