@@ -5,6 +5,10 @@
  */
 package ejemplo;
 
+import Conexion.ConexionSQL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +20,9 @@ public class EliminarProd extends javax.swing.JInternalFrame {
     /**
      * Creates new form EliminarProd
      */
+    ConexionSQL cc = new ConexionSQL();
+    Connection con =cc.conexion();
+    
     private javax.swing.JMenuBar men;
     
     public EliminarProd() {
@@ -40,7 +47,7 @@ public class EliminarProd extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEliminar = new javax.swing.JTextField();
         BtnDelete = new javax.swing.JButton();
         BtnCerrar = new javax.swing.JButton();
 
@@ -71,7 +78,7 @@ public class EliminarProd extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+                        .addComponent(txtEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BtnCerrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -84,7 +91,7 @@ public class EliminarProd extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -99,8 +106,48 @@ public class EliminarProd extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void limpiar(){
+        
+        txtEliminar.setText("");
+    }
+    
+    public void EliminarProducto(){
+    
+        try {
+            
+            Object[] options ={"si","no"};
+            
+            
+            
+            int n = JOptionPane.showOptionDialog(null, 
+            " Estas seguro de que quieres eliminar el producto: " + txtEliminar.getText() + " ?", 
+            "Exit Confirmation", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options);
+            
+            if (n == JOptionPane.YES_OPTION) {
+                
+                String SQL="delete from Producto where codigoProd="+txtEliminar.getText();
+            
+                Statement st= con.createStatement();
+            
+                st.executeUpdate(SQL);
+                
+                
+                JOptionPane.showMessageDialog(null,"Producto Eliminado!");
+            }
+            
+            
+            
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"ho ha sido posible eliminar el producto "+e.getMessage());
+        }
+    }
     private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
-        JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminar este producto?");
+        
+        
+        EliminarProducto();
+       this.setVisible(false);
+        men.show();
     }//GEN-LAST:event_BtnDeleteActionPerformed
 
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
@@ -114,6 +161,6 @@ public class EliminarProd extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnCerrar;
     private javax.swing.JButton BtnDelete;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtEliminar;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,15 @@
  */
 package ejemplo;
 
-import java.util.Locale;
+import Conexion.ConexionSQL;
+import com.mysql.cj.protocol.Resultset;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -16,15 +24,20 @@ public class ListarProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListarProductos
      */
+    ConexionSQL cc = new ConexionSQL();
+    Connection con =cc.conexion();
+    
+    
     private javax.swing.JMenuBar men;
     public ListarProductos() {
         initComponents();
+        
     }
     //Constructor que permite mostrar el menu//
     public ListarProductos(javax.swing.JMenuBar menu) {
         initComponents();
         men = menu;
-        
+        listarProductos();
     }
 
     /**
@@ -45,39 +58,39 @@ public class ListarProductos extends javax.swing.JInternalFrame {
 
         ListarProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Codigo", "Nombre", "Categoria", "Stock", "Fecha Elaboracion", "Fecha Vencimiento", "Descripcion"
+
             }
         ));
         jScrollPane1.setViewportView(ListarProd);
@@ -127,6 +140,40 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void listarProductos(){
+        
+        String[] titulos={"ID Producto","Codigo Producto","Nombre","Fecha Elaboracion","Fecha Vencimiento","Precio Unitario","Marca","Descripción"};
+        String[] registros = new String[8];
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+        
+        String SQL="select * from Producto";
+        
+        try {
+            
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery(SQL);
+            
+            
+            while(rs.next()){
+                
+                registros[0]=rs.getString("idProducto");
+                registros[1]=rs.getString("codigoProd");
+                registros[2]=rs.getString("nombre");
+                registros[3]=rs.getString("fecha_elab");
+                registros[4]=rs.getString("fecha_ven");
+                registros[5]=rs.getString("precio_unitario");
+                registros[6]=rs.getString("marca");
+                registros[7]=rs.getString("descripcion");
+                
+                modelo.addRow(registros);
+                
+                ListarProd.setModel(modelo);
+            
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al cargar los datos "+ e.getMessage());
+        }
+    }
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
         setVisible(false);
         men.show();
